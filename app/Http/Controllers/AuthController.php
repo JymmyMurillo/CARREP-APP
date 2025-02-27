@@ -10,13 +10,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        echo $credentials['password'];
+        
 
         if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
             return redirect()->intended('dashboard');
         }
 
-        return back()->withErrors(['error' => 'Credenciales incorrectas.']);
+        return back()->withErrors(['error' => 'El usuario o la contraseña son incorrectos.']);
     }
 
     public function logout(Request $request)

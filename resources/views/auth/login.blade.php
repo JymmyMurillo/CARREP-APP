@@ -15,6 +15,16 @@
                         <h3 class="text-center">Iniciar Sesión</h3>
                     </div>
                     <div class="card-body">
+                        <!-- Mostrar mensajes de error -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="mb-3">
