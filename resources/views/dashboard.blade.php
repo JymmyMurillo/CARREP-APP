@@ -13,7 +13,11 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}">Cerrar Sesión</a>
+                        <!-- Formulario para cerrar sesión -->
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; cursor: pointer;">Cerrar Sesión</button>
+                        </form>
                     </li>
                 </ul>
             </div>
