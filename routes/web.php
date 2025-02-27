@@ -1,6 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+
+// Ruta de inicio de sesión
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+// Ruta para procesar el login
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+// Ruta del dashboard (protegida por autenticación)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -12,11 +28,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
