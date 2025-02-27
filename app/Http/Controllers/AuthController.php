@@ -10,8 +10,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
+        echo $credentials['password'];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
             return redirect()->intended('dashboard');
         }
 
